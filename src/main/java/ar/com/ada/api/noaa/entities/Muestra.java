@@ -13,8 +13,9 @@ public class Muestra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer muestraId;
 
-    @Column(name = "boya_id")
-    private Boya boyaId;
+    @ManyToOne
+    @JoinColumn(name = "boya_id", referencedColumnName = "boya_id")
+    private Boya boya;
 
     @Column(name = "horario_muestra")
     private Date horarioMuestra;
@@ -39,12 +40,13 @@ public class Muestra {
         this.muestraId = muestraId;
     }
 
-    public Boya getBoyaId() {
-        return boyaId;
+    public Boya getBoya() {
+        return boya;
     }
 
-    public void setBoyaId(Boya boyaId) {
-        this.boyaId = boyaId;
+    public void setBoya(Boya boya) {
+        this.boya = boya;
+        this.boya.agregarMuestra(this);
     }
 
     public Date getHorarioMuestra() {
