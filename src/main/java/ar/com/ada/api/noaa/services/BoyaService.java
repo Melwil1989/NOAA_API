@@ -1,5 +1,7 @@
 package ar.com.ada.api.noaa.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,16 @@ public class BoyaService {
     @Autowired
     MuestraService muestraService;
 
-    public Boya crear(double longitudInstalacion, double latitudInstalacion) {
-        
-        Boya boya = new Boya();
-
+    public void crear(Boya boya) {
         repo.save(boya);
-        return boya;
+    }
+
+    public List<Boya> traerBoyas() {
+        return repo.findAll();
+    }
+
+    public Boya findByBoyaId(Integer boyaId) {
+        return repo.findByBoyaId(boyaId);
     }
     
 }

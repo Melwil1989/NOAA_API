@@ -30,7 +30,7 @@ public class Muestra {
     private double latitud;
 
     @Column(name = "altura_al_nivel_del_mar")
-    private int alturaAlNivelDelMar;
+    private double alturaAlNivelDelMar;
 
     public Integer getMuestraId() {
         return muestraId;
@@ -44,7 +44,7 @@ public class Muestra {
         return boya;
     }
 
-    public void setBoya(Boya boya) {
+    public void setBoyaId(Boya boya) {
         this.boya = boya;
         this.boya.agregarMuestra(this);
     }
@@ -81,11 +81,11 @@ public class Muestra {
         this.latitud = latitud;
     }
 
-    public int getAlturaAlNivelDelMar() {
+    public double getAlturaAlNivelDelMar() {
         return alturaAlNivelDelMar;
     }
 
-    public void setAlturaAlNivelDelMar(int alturaAlNivelDelMar) {
+    public void setAlturaAlNivelDelMar(double alturaAlNivelDelMar) {
         this.alturaAlNivelDelMar = alturaAlNivelDelMar;
     }
     

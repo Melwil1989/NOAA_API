@@ -4,9 +4,20 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "boya")
 public class Boya {
+
+    public Boya(double longitudInstalacion, double latitudInstalacion) {
+        this.longitudInstalacion = longitudInstalacion;
+        this.latitudInstalacion = latitudInstalacion;
+    }
+
+    public Boya() {
+        
+    }
 
     @Id
     @Column(name = "boya_id")
@@ -22,6 +33,7 @@ public class Boya {
     @Column(name = "latitud_instalacion")
     private double latitudInstalacion;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "boya", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Muestra> muestras = new ArrayList<>();
 
@@ -68,8 +80,6 @@ public class Boya {
     public void agregarMuestra(Muestra muestra) {
         this.muestras.add(muestra);
     }
-
-
 
     public enum ColorEnum {
         ROJO(1), AMARILLO(2), VERDE(3), AZUL(4);
