@@ -41,4 +41,9 @@ public class BoyaController {
         return ResponseEntity.ok(service.traerBoyas());
     }
 
+    /*@PutMapping("/api/boya/{id}")
+    public ResponseEntity<?> actualizarBoya() {
+
+    }*/
+
 }

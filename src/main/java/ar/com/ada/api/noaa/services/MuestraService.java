@@ -19,23 +19,25 @@ public class MuestraService {
     @Autowired
     BoyaService boyaService;
 
-    public Muestra crearMuestra(Integer boyaId, Date horarioMuestra, String matriculaEmbarcacion, double latitud,
-                                double longitud, double alturaAlNivelDelMar) {
-
-        Muestra muestra = new Muestra();
+    public Muestra crearMuestra(Integer boyaId, Date horarioMuestra, double latitud, double longitud, double alturaAlNivelDelMar) {
         
-        Boya boya = boyaService.findByBoyaId(boyaId);
-        boya.setBoyaId(boyaId);
+        Muestra muestraNueva = new Muestra();
 
-        muestra.setHorarioMuestra(horarioMuestra);
-        muestra.setMatriculaEmbarcacion(matriculaEmbarcacion);
-        muestra.setLatitud(latitud);
-        muestra.setLongitud(longitud);
-        muestra.setAlturaAlNivelDelMar(alturaAlNivelDelMar);
+        muestraNueva.setHorarioMuestra(horarioMuestra);
+        muestraNueva.setLatitud(latitud);
+        muestraNueva.setLongitud(longitud);
+        muestraNueva.setAlturaAlNivelDelMar(alturaAlNivelDelMar);
 
-        boya.agregarMuestra(muestra);
+        Boya boya = boyaService.getBoyaById(boyaId);
+        muestraNueva.setBoya(boya);
 
-        return repo.save(muestra);   
+        muestraNueva = repo.save(muestraNueva); // devuelve la muestra con el ID actualizado
+
+        boya.agregarMuestra(muestraNueva); // agrega la muestra actualizada a la lista de muestras
+
+        //actualizarBoya(boya);
+
+        return muestraNueva;
     }
 
     public void cambiarColorLuz(double alturaAlNivelDelMar) {

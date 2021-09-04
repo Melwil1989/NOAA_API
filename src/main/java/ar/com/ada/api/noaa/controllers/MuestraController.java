@@ -23,10 +23,11 @@ public class MuestraController {
 
     @PostMapping("/api/muestras")
     public ResponseEntity<InfoMuestraResponse> crear(@RequestBody Muestra muestra) {
+        
+        service.crearMuestra(muestra.getBoya().getBoyaId(), muestra.getHorarioMuestra(), muestra.getLatitud(), 
+        muestra.getLongitud(), muestra.getAlturaAlNivelDelMar());
 
         InfoMuestraResponse respuesta = new InfoMuestraResponse();
-
-        service.crearMuestra(muestra);
 
         respuesta.muestraId = muestra.getMuestraId();
         respuesta.colorLuz = Boya.ColorEnum.AZUL;

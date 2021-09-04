@@ -8,6 +8,21 @@ import javax.persistence.*;
 @Table(name = "muestra")
 public class Muestra {
 
+    public Muestra(Boya boya, Date horarioMuestra, String matriculaEmbarcacion, double latitud, double longitud,
+                    double alturaAlNivelDelMar) {
+
+        boya.getBoyaId();
+        this.horarioMuestra = horarioMuestra;
+        this.matriculaEmbarcacion = matriculaEmbarcacion;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.alturaAlNivelDelMar = alturaAlNivelDelMar;
+    }
+
+    public Muestra() {
+
+    }
+
     @Id
     @Column(name = "muestra_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,7 +59,7 @@ public class Muestra {
         return boya;
     }
 
-    public void setBoyaId(Boya boya) {
+    public void setBoya(Boya boya) {
         this.boya = boya;
         this.boya.agregarMuestra(this);
     }
