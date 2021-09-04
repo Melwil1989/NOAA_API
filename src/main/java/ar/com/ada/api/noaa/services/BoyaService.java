@@ -19,14 +19,17 @@ public class BoyaService {
     MuestraService muestraService;
 
     public void crear(Boya boya) {
+
         repo.save(boya);
     }
 
     public List<Boya> traerBoyas() {
+
         return repo.findAll();
     }
 
-    public Boya getBoyaById(Integer boyaId) {
+    public Boya obtenerBoyaPorId(Integer boyaId) {
+        
         return repo.findByBoyaId(boyaId);
     }
 

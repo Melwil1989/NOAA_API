@@ -8,17 +8,6 @@ import javax.persistence.*;
 @Table(name = "muestra")
 public class Muestra {
 
-    public Muestra(Boya boya, Date horarioMuestra, String matriculaEmbarcacion, double latitud, double longitud,
-                    double alturaAlNivelDelMar) {
-
-        boya.getBoyaId();
-        this.horarioMuestra = horarioMuestra;
-        this.matriculaEmbarcacion = matriculaEmbarcacion;
-        this.latitud = latitud;
-        this.longitud = longitud;
-        this.alturaAlNivelDelMar = alturaAlNivelDelMar;
-    }
-
     public Muestra() {
 
     }
@@ -28,9 +17,8 @@ public class Muestra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer muestraId;
 
-    @ManyToOne
-    @JoinColumn(name = "boya_id", referencedColumnName = "boya_id")
-    private Boya boya;
+    @Transient
+    private Integer boyaId;
 
     @Column(name = "horario_muestra")
     private Date horarioMuestra;
@@ -46,6 +34,10 @@ public class Muestra {
 
     @Column(name = "altura_al_nivel_del_mar")
     private double alturaAlNivelDelMar;
+
+    @ManyToOne
+    @JoinColumn(name = "boya_id", referencedColumnName = "boya_id")
+    private Boya boya;
 
     public Integer getMuestraId() {
         return muestraId;
@@ -102,6 +94,10 @@ public class Muestra {
 
     public void setAlturaAlNivelDelMar(double alturaAlNivelDelMar) {
         this.alturaAlNivelDelMar = alturaAlNivelDelMar;
+    }
+
+    public Integer getBoyaId() {
+        return boyaId;
     }
     
 }

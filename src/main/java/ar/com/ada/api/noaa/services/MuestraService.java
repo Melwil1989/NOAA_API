@@ -19,17 +19,29 @@ public class MuestraService {
     @Autowired
     BoyaService boyaService;
 
-    public Muestra crearMuestra(Integer boyaId, Date horarioMuestra, double latitud, double longitud, double alturaAlNivelDelMar) {
+    public Muestra crearMuestra(Integer boyaId, Date horarioMuestra, String matriculaEmbarcacion, double latitud, 
+                            double longitud, double alturaAlNivelDelMar) {
         
         Muestra muestraNueva = new Muestra();
 
         muestraNueva.setHorarioMuestra(horarioMuestra);
+        muestraNueva.setMatriculaEmbarcacion(matriculaEmbarcacion);
         muestraNueva.setLatitud(latitud);
         muestraNueva.setLongitud(longitud);
         muestraNueva.setAlturaAlNivelDelMar(alturaAlNivelDelMar);
 
-        Boya boya = boyaService.getBoyaById(boyaId);
+        Boya boya = boyaService.obtenerBoyaPorId(boyaId);
         muestraNueva.setBoya(boya);
+
+        if(alturaAlNivelDelMar > 100 || alturaAlNivelDelMar < -100) {
+            boya.setColorLuz(ColorEnum.ROJO); 
+
+        } else if(alturaAlNivelDelMar > 50 || alturaAlNivelDelMar < -50)  {
+            boya.setColorLuz(ColorEnum.AMARILLO); 
+            
+        } else {
+            boya.setColorLuz(ColorEnum.VERDE); 
+        }
 
         muestraNueva = repo.save(muestraNueva); // devuelve la muestra con el ID actualizado
 
@@ -38,25 +50,6 @@ public class MuestraService {
         //actualizarBoya(boya);
 
         return muestraNueva;
-    }
-
-    public void cambiarColorLuz(double alturaAlNivelDelMar) {
-
-        Boya boya = new Boya();
-
-        if(alturaAlNivelDelMar > 50 && alturaAlNivelDelMar < 100 || alturaAlNivelDelMar < -50 && alturaAlNivelDelMar > -100) {
-            boya.setColorLuz(ColorEnum.AMARILLO); 
-
-        } else if(alturaAlNivelDelMar < 100 && alturaAlNivelDelMar > -100) {
-            boya.setColorLuz(ColorEnum.ROJO);
-            
-        } else 
-            boya.setColorLuz(ColorEnum.VERDE); 
-
-    }
-
-    public void crearMuestra(Muestra muestra) {
-        repo.save(muestra);
     }
     
 }

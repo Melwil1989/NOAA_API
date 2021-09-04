@@ -41,6 +41,12 @@ public class BoyaController {
         return ResponseEntity.ok(service.traerBoyas());
     }
 
+    @GetMapping("/api/boyas/{id}")
+    public ResponseEntity<Boya> obtenerBoyaPorId(@PathVariable Integer boyaId) {
+
+        return ResponseEntity.ok(service.obtenerBoyaPorId(boyaId));
+    }
+
     /*@PutMapping("/api/boya/{id}")
     public ResponseEntity<?> actualizarBoya() {
 
