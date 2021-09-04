@@ -28,12 +28,12 @@ public class BoyaService {
         return repo.findAll();
     }
 
-    public Boya obtenerBoyaPorId(Integer boyaId) {
-        
-        return repo.findByBoyaId(boyaId);
+    public Boya obtenerBoyaPorId(Integer id) {
+
+        return repo.findByBoyaId(id);
     }
 
-    public boolean actualizarBoya(Boya boya) {
+    /*public boolean actualizarBoya(Boya boya) {
 
         Optional<Boya> resultado = repo.findById(boya.getBoyaId());
 
@@ -43,6 +43,11 @@ public class BoyaService {
         }
         
         return false;
+    }*/
+
+    public void actualizarBoya(Boya boya) {
+        
+        repo.save(boya);
     }
     
 }
