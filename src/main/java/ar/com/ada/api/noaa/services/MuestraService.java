@@ -1,6 +1,6 @@
 package ar.com.ada.api.noaa.services;
 
-import java.util.Date;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +50,13 @@ public class MuestraService {
         //actualizarBoya(boya);
 
         return muestraNueva;
+    }
+
+    public List<Muestra> obtenerMuestras(Integer idBoya) {
+                
+        Boya boya = boyaService.obtenerBoyaPorId(idBoya);
+
+        return boya.getMuestras();
     }
     
 }
