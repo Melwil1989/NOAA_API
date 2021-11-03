@@ -58,5 +58,10 @@ public class MuestraService {
 
         return boya.getMuestras();
     }
+
+    public Muestra obtenerMuestraPorId(Integer id) {
+
+        return repo.findByMuestraId(id);
+    }
     
 }

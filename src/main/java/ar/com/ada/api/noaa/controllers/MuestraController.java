@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import ar.com.ada.api.noaa.entities.Boya;
 import ar.com.ada.api.noaa.entities.Muestra;
 import ar.com.ada.api.noaa.models.response.GenericResponse;
 import ar.com.ada.api.noaa.models.response.InfoMuestraResponse;
@@ -44,13 +45,16 @@ public class MuestraController {
     @DeleteMapping("/api/muestras/{id}")
     public ResponseEntity<GenericResponse> cambiarColorMuestra(@PathVariable Integer id) {
 
-        boyaService.cambiarColorBoya(id);
+        Muestra muestra = service.obtenerMuestraPorId(id);
+
+        Boya boya = muestra.getBoya();
+        boyaService.cambiarColorBoya(boya);
 
         GenericResponse respuesta = new GenericResponse();
 
         respuesta.id = id;
         respuesta.isOk = true;
-        respuesta.message = "Muestra reseteada exitosamente";
+        respuesta.message = "Boya reseteada exitosamente";
 
         return ResponseEntity.ok(respuesta);
     }
