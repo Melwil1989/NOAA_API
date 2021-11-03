@@ -5,7 +5,5 @@ import ar.com.ada.api.noaa.entities.Boya.ColorEnum;
 public class InfoMuestraResponse {
 
     public Integer muestraId;
-
-    public ColorEnum colorLuz;
-    
+    public ColorEnum colorLuz;    
 }

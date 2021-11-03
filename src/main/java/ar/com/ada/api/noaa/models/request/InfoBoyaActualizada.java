@@ -4,6 +4,5 @@ import ar.com.ada.api.noaa.entities.Boya.ColorEnum;
 
 public class InfoBoyaActualizada {
 
-    public ColorEnum color;
-    
+    public ColorEnum color;   
 }

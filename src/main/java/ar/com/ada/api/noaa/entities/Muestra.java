@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "muestra")
 public class Muestra {
@@ -18,6 +20,7 @@ public class Muestra {
     private Integer muestraId;
 
     @Transient
+    @JsonIgnore
     private Integer boyaId;
 
     @Column(name = "horario_muestra")
