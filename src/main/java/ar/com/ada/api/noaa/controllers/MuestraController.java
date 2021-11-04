@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import ar.com.ada.api.noaa.entities.Boya;
 import ar.com.ada.api.noaa.entities.Muestra;
+import ar.com.ada.api.noaa.models.request.MuestraNueva;
 import ar.com.ada.api.noaa.models.response.GenericResponse;
 import ar.com.ada.api.noaa.models.response.InfoMuestraResponse;
 import ar.com.ada.api.noaa.services.BoyaService;
@@ -23,12 +24,12 @@ public class MuestraController {
     BoyaService boyaService;
 
     @PostMapping("/api/muestras")
-    public ResponseEntity<InfoMuestraResponse> crear(@RequestBody Muestra muestra) {
-        
-        muestra = service.crearMuestra(muestra.getBoyaId(), muestra.getHorarioMuestra(), muestra.getMatriculaEmbarcacion(), 
-                                muestra.getLatitud(), muestra.getLongitud(), muestra.getAlturaAlNivelDelMar());
+    public ResponseEntity<InfoMuestraResponse> crear(@RequestBody MuestraNueva muestraNueva) {
 
         InfoMuestraResponse respuesta = new InfoMuestraResponse();
+
+        Muestra muestra = service.crearMuestra(muestraNueva.boyaId, muestraNueva.horarioMuestra, muestraNueva.matriculaEmbarcacion,
+                                            muestraNueva.latitud, muestraNueva.longitud, muestraNueva.alturaAlNivelDelMar);
 
         respuesta.muestraId = muestra.getMuestraId();
         respuesta.colorLuz = muestra.getBoya().getColorLuz();

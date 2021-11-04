@@ -20,7 +20,7 @@ public class MuestraService {
     BoyaService boyaService;
 
     public Muestra crearMuestra(Integer boyaId, Date horarioMuestra, String matriculaEmbarcacion, double latitud, 
-                            double longitud, double alturaAlNivelDelMar) {
+                            double longitud, double alturaAlNivelDelMar) {   
         
         Muestra muestraNueva = new Muestra();
 
@@ -33,15 +33,15 @@ public class MuestraService {
         Boya boya = boyaService.obtenerBoyaPorId(boyaId);
         muestraNueva.setBoya(boya);
 
-        if(alturaAlNivelDelMar > 100 || alturaAlNivelDelMar < -100) {
-            boya.setColorLuz(ColorEnum.ROJO); 
+            if(alturaAlNivelDelMar > 100 || alturaAlNivelDelMar < -100) {
+                boya.setColorLuz(ColorEnum.ROJO); 
 
-        } else if(alturaAlNivelDelMar > 50 || alturaAlNivelDelMar < -50)  {
-            boya.setColorLuz(ColorEnum.AMARILLO); 
+            } else if(alturaAlNivelDelMar > 50 || alturaAlNivelDelMar < -50)  {
+                boya.setColorLuz(ColorEnum.AMARILLO); 
             
-        } else {
-            boya.setColorLuz(ColorEnum.VERDE); 
-        }
+            } else {
+                boya.setColorLuz(ColorEnum.VERDE); 
+            }
 
         muestraNueva = repo.save(muestraNueva); // devuelve la muestra con el ID actualizado
 

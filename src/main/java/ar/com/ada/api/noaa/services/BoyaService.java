@@ -1,6 +1,6 @@
 package ar.com.ada.api.noaa.services;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,20 +30,13 @@ public class BoyaService {
 
     public Boya obtenerBoyaPorId(Integer id) {
 
-        return repo.findByBoyaId(id);
+        Optional<Boya> resultado = repo.findById(id);
+
+        if(resultado.isPresent())
+            return resultado.get();
+
+        return null;
     }
-
-    /*public boolean actualizarBoya(Boya boya) {
-
-        Optional<Boya> resultado = repo.findById(boya.getBoyaId());
-
-        if(resultado.isPresent()) {
-            
-            return true;
-        }
-        
-        return false;
-    }*/
 
     public void actualizarBoya(Boya boya) {
         
@@ -57,6 +50,12 @@ public class BoyaService {
         boyaReseteada.setColorLuz(ColorEnum.AZUL);
 
         repo.save(boyaReseteada);
+    }
+
+    public boolean existePorId(Integer id) {
+
+        Boya boya = repo.findByBoyaId(id);
+        return boya != null;
     }
     
 }
